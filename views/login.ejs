@@ -1,11 +1,26 @@
 <% layout('./layout/boiler-plate') %>
-
+<meta name="google-signin-client_id" content="86993469619-edmshc4ucq4qcoavr0navr3kcocnc2t4.apps.googleusercontent.com">
 <div class="form">
-    <form method="post" action="/login">
-        <label>Username</label>
-        <input type="text">
-        <label>Password</label>
-        <input type="password">
+    <form method="POST" action="/login">
+        <div>
+            <label for="uname">Username </label>
+            <input type="text" name="uname" id="uname">
+        </div>
+        <div>
+            <label for="pass">Password</label>
+            <input name="pass" id="pass" type="password">
+        </div>
         <input type="submit">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </form>
 </div>
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
